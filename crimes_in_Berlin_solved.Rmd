@@ -1,0 +1,36 @@
+---
+title: "Berlin_crimes_2012-2019"
+author: "Garro"
+date: "2023-08-10"
+output: html_document
+---
+
+Read the dataset
+```{r}
+library(tidyverse)
+
+berlin_crimes <- read_csv("Berlin_crimes.csv", show_col_types = FALSE)
+```
+
+ctrl + alt + i (for a new chunk of code)
+
+1. How many columns and rows are in the dataset? What are their types?
+
+```{r}
+glimpse(berlin_crimes)
+```
+
+RR:
+
+There are 20 columns, 2 of type character and the resting 18 are integers. There are 1200 rows.
+
+
+2. How many districts does Berlin have?
+
+
+3. What is the year where the least amount of bike thefts happened?
+
+
+4. What wis the district that had the most crime in Berlin on 2019?
+
+5. Plottee algo :D
