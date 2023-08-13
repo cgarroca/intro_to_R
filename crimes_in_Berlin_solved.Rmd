@@ -27,10 +27,42 @@ There are 20 columns, 2 of type character and the resting 18 are integers. There
 
 2. How many districts does Berlin have?
 
+```{r}
+berlin_crimes %>% select(District) %>% unique()
+```
 
-3. What is the year where the least amount of bike thefts happened?
+
+3. What is the district that had the least amount of bike thefts in 2019?
+
+```{r}
+berlin_crimes %>% filter(Year == 2019) %>% select(District, Bike) %>% group_by(District) %>% 
+  summarise(Bike = sum(Bike)) %>% arrange(Bike)
+```
 
 
-4. What wis the district that had the most crime in Berlin on 2019?
+4. What were the total crimes committed in your district in Berlin on 2019?
 
-5. Plottee algo :D
+If you are not sure where your neighbourhood is, check out this map:
+https://en.wikipedia.org/wiki/Boroughs_and_neighborhoods_of_Berlin#/media/File:Berlin,_administrative_divisions_(+districts_+boroughs_-pop)_-_de_-_colored.svg
+
+```{r}
+table(berlin_crimes$District)
+#Prenzlauerberg is in Pankow
+pankow_2019 <- berlin_crimes %>% filter(Year == 2019 & District == "Pankow") %>% select(-c(Code, Location, Year, District)) 
+pankow_2019
+colSums(pankow_2019)
+
+```
+
+
+5. Plot algo :D
+
+```{r}
+data <- data.frame(colSums(pankow_2019))
+data$crime_name <- row.names(data)
+names(data) <- c("total", "crime_name")
+data
+barplot(sort(data$total, decreasing = TRUE), names= data$crime_name,
+        horiz = TRUE, las = 1)
+```
+
