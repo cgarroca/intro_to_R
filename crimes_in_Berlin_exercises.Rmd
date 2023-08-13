@@ -19,25 +19,17 @@ This dataset includes 16 categories of crimes and information pertaining the yea
 a) Read the dataset and load tidyverse. Is this tidydata? Use head(data) to find out.
 ```{r}
 #YOUR CODE HERE
-library(tidyverse)
-long_berlin_crimes <- read_csv("berlin_crimes_v1.csv", show_col_types = FALSE)
-head(long_berlin_crimes)
 ```
 
 b) Let's transform the data to a friendlier format with pivot_wider()
 ```{r}
 #YOUR CODE HERE
-berlin_crimes <- long_berlin_crimes %>% 
-  pivot_wider(names_from = type_of_crime, values_from = total)
-
-head(berlin_crimes)
 ```
 
 c) How many columns and rows are in the dataset? What are their types? Use the glimpse() function.
 
 ```{r}
 #YOUR CODE HERE
-glimpse(berlin_crimes)
 ```
 
 ### Exercise 2 - Let's explore the data
@@ -46,14 +38,12 @@ a) How many districts does Berlin have? How many locations? You can use the sele
 
 ```{r}
 #YOUR CODE HERE
-berlin_crimes %>% select(District) %>% unique()
 ```
 
 There are 12 Districts in Berlin.
 
 ```{r}
-#YOUR CODE HERE
-berlin_crimes %>% select(Location) %>% unique()
+#YOUR CODE HER
 ```
 
 There are 150 possible locations for crimes.
@@ -70,8 +60,6 @@ a) What is the district that had the least amount of bike thefts in 2019? Use th
 
 ```{r}
 #YOUR CODE HERE
-berlin_crimes %>% filter(Year == 2019) %>% select(District, Bike) %>% group_by(District) %>% 
-  summarise(Bike = sum(Bike)) %>% arrange(Bike)
 ```
 
 b) What were the total crimes of each category committed in your district in Berlin on 2019?
@@ -85,13 +73,6 @@ Use colSums() to get the total crimes of each category
 
 ```{r}
 #YOUR CODE HERE
-#Prenzlauerberg is in Pankow
-pankow_2019 <- berlin_crimes %>% 
-  filter(Year == 2019 & District == "Pankow") %>% 
-  select(-c(Code, Location, Year, District)) 
-
-colSums(pankow_2019)
-
 ```
 
 ### Exercise 4 - Visualizing crimes
@@ -100,7 +81,7 @@ Fit the name of your district in the following code, we are going to use the pac
 
 ```{r}
 district_2019 <- berlin_crimes %>% 
-  filter(Year == 2019 & District == "Pankow") %>% 
+  filter(Year == 2019 & District == "write your district here") %>% 
   select(-c(Code, Location, Year, District)) 
 
 data <- data.frame(colSums(district_2019))
