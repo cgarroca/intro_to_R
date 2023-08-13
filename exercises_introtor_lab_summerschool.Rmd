@@ -1,0 +1,198 @@
+---
+title: "Data Science Summer School - Intro to R: Lab"
+date: "`r format(Sys.time(), '%B %d, %Y | %H:%M:%S | %Z')`"
+output:
+  html_document:
+    code_folding: show
+    df_print: paged
+    highlight: tango
+    number_sections: no
+    theme: cosmo
+    toc: no
+---
+  
+<style>
+div.answer {background-color:#f3f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      error = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      comment = NA)
+```
+
+
+***
+
+<br>
+
+### Intro to the Comparative Legislators Database
+
+Why this database? Because it was made by one of your future professors - Simon Munzert! You can check out a introduction and little tutorial [here](https://cran.r-project.org/web/packages/legislatoR/vignettes/legislatoR.html). The Comparative Legislators Database (CLD) includes political, sociodemographic, career, online presence, public attention, and visual information for over 45,000 contemporary and historical politicians from ten countries (see the [corresponding article](https://www.cambridge.org/core/journals/british-journal-of-political-science/article/comparative-legislators-database/D28BB58A8B2C08C8593DB741F42C18B2) for more information). It can be accessed via `legislatoR` - an R package that is available on both [CRAN](https://cran.r-project.org/web/packages/legislatoR/index.html) and [GitHub](https://github.com/saschagobel/legislatoR).
+
+For the following tasks, you can choose ONE of the legislatures:
+
+| Legislature | Code |
+|---------|-------|-------|
+| Austrian Nationalrat | `aut` |
+| Canadian House of Commons | `can` |
+| Czech Poslanecka Snemovna | `cze` |
+| Spanish Congreso de los Diputados | `esp` |
+| French Assemblée | `fra` |
+| German Bundestag | `deu` |
+| Irish Dail | `irl` |
+| UK House of Commons | `gbr` |
+| US House of Representatives  | `usa_house` |
+
+We will do some exercises with the data from the `core` and `political` tables of the database. The `core` tables includes sociodemographic data of the legislators and the `political` contains political data of the legislators.
+
+<br>
+
+***
+
+### Exercise 1 - let's set up our working environment 
+
+a) install the package legislatoR and load it. Further we will use tidyr to analyse the data.
+
+```{r}
+# YOUR CODE HERE
+
+#Tip: library(nameofpackage), install.packages('nameofpackage')
+
+```
+
+### Exercise 1 - Let's get an overview of the data 
+
+a) Use the ? to get an overview of the functions in legislatoR
+
+```{r}
+# YOUR CODE HERE
+
+```
+
+b) Use the functions get_core() and get_political(), specifying your chosen legislatures as an argument, to save the tables in two variables.
+
+```{r}
+# YOUR CODE HERE
+
+#Tip: yourvariable <- get_core(legislature = "yourlegislaturecode")
+```
+
+c) Let's get an overview of the `core` table using the head() function.
+
+```{r}
+# YOUR CODE HERE
+
+
+```
+
+d) Let's get rid of the columns 'pageid','wikidataid' and 'wikititle'
+
+```{r}
+# YOUR CODE HERE
+
+```
+
+### Exercise 2 - Let's start with some descriptives
+
+a) How many legislators are the dataset?
+
+```{r}
+# YOUR CODE HERE
+
+
+```
+
+b) What's the overall share of female legislators in the dataset?
+
+```{r}
+# YOUR CODE HERE
+
+
+```
+
+c) How many legislators died in the same place they were born in? 
+
+```{r}
+# YOUR CODE HERE
+
+# Tip: use mutate and if_else to create a column that has 1 if birthplace and deathplace are the same and 0 otherwise
+
+```
+
+d) Let's check out the political dataset! Get a glimpse of the data and find out how many unique parties are included in the dataset.
+
+```{r}
+# YOUR CODE HERE
+
+```
+
+<br>
+
+***
+
+### Exercise 2 - Let's combine the two datasets
+
+a) Let's join the two dataframes to be able to get more insights into the political background of the legislators
+
+```{r}
+# we can join both dataframes using the left_join() function. It takes 3 arguments: x = thefirstdataframe, y = theseconddataframe, by = "nameofthevariabletojoinby". In our case the variable "pageid" is the same in both datasets.
+
+# YOUR CODE HERE
+
+```
+
+b) Earlier we have analysed the total number of female legislators in our dataset. Given that we now have information on the different sessions, lets find the number of female legislators differentiated by session.
+
+```{r}
+# YOUR CODE HERE
+
+# get the count per sessions for gender 'female'
+
+```
+
+c) Let's plot our results using the amazing library ggplot2 (let me assure you: you will spend hours with it in the near future) 
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+# for ggplot, the different arguments or specifications are combined with a +
+# in the first brackets you speficy the dataframe and within the aes() the columns of your dataframe that should be plotted on the x and y axis
+
+ggplot(yourdataframe, aes(x = , y = )) + 
+  geom_bar(stat = "identity") +
+  ggtitle(label = "Count of female legislators by session") +
+  xlab("Sessions") + 
+  ylab("Count of female legislators")
+
+```
+
+<br>
+
+***
+
+### Exercise 3 - Fun with functions 
+
+a) Program a function `ultimate_answer()` that always returns the number 42, and show with some examples that it works!
+
+```{r}
+# YOUR CODE HERE
+
+
+```
+
+
+```{r}
+# YOUR CODE HERE
+
+
+```
+
+
+
+
